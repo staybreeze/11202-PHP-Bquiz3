@@ -1,16 +1,16 @@
 <?php
 include_once "./api/db.php";
 
-if(!empty($_POST)){
+if (!empty($_POST)) {
 
-  if($_POST['acc']=='admin'&& $_POST['pw']==1234){
-$_SESSION['login']=1;
+  if ($_POST['acc'] == 'admin' && $_POST['pw'] == 1234) {
+    // 只要讓$_SESSION['login']有值就可以，不見得要1
+    $_SESSION['login'] = 1;
+  } else {
 
-  }else{
-
-    $error="<div class='ct' style='color:red'>帳號或密碼錯誤</div>";
-  
-}}
+    $error = "<div class='ct' style='color:red'>帳號或密碼錯誤</div>";
+  }
+}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -43,67 +43,67 @@ $_SESSION['login']=1;
         </marquee>
       </div>
       <div id="mm">
-<?php
-if(isset($_SESSION['login'])){
+        <?php
+        if (isset($_SESSION['login'])) {
 
 
 
 
-?>
+        ?>
 
-        <div class="ct a rb" style="position:relative; width:101.5%; left:-1%; padding:3px; top:-9px;">
-          <a href="?do=tit">網站標題管理</a>|
-          <a href="?do=go">動態文字管理</a>|
-          <a href="?do=poster">預告片海報管理</a>|
-          <a href="?do=movie">院線片管理</a>|
-          <a href="?do=order">電影訂票管理</a>
-        </div>
-        <div class="rb tab">
-  <?php
-  
+          <div class="ct a rb" style="position:relative; width:101.5%; left:-1%; padding:3px; top:-9px;">
+            <a href="?do=tit">網站標題管理</a>|
+            <a href="?do=go">動態文字管理</a>|
+            <a href="?do=poster">預告片海報管理</a>|
+            <a href="?do=movie">院線片管理</a>|
+            <a href="?do=order">電影訂票管理</a>
+          </div>
+          <div class="rb tab">
+            <?php
 
 
-$do=$_GET['do']??'main';
-$file="./back/{$do}.php";
-if(file_exists($file)){
 
-  include $file;
-}else{
+            $do = $_GET['do'] ?? 'main';
+            $file = "./back/{$do}.php";
+            if (file_exists($file)) {
 
-  include "./back/main.php";
-}
+              include $file;
+            } else {
 
-  
-  ?>
-        </div>
+              include "./back/main.php";
+            }
+
+
+            ?>
+          </div>
 
         <?php
-        }else{
+        } else {
 
-          ?>
+        ?>
           <h3 class="ct">管理者登入</h3>
           <?php
-          if(isset($error)){
+          if (isset($error)) {
 
             echo $error;
           }
-          
+
           ?>
-<form action="" method="post" style="width:40%;margin:20px auto">
-  <table>
-    <tr>
-      <td>帳號:</td>
-      <td><input type="text" name="acc"></td>
-    </tr>
-    <tr>
-    <td>密碼:</td>
-      <td><input type="password" name="pw"></td>
-    </tr>
-  </table>
-  <div class="ct"><input type="submit" value="登入">
-</div>
-</form>
-<?php
+          <form action="" method="post" style="width:40%;margin:20px auto">
+            <table>
+              <tr>
+                <td>帳號:</td>
+                <td><input type="text" name="acc"></td>
+              </tr>
+              <tr>
+                <td>密碼:</td>
+                <td><input type="password" name="pw"></td>
+              </tr>
+            </table>
+            <div class="ct"><input type="submit" value="登入">
+            </div>
+          </form>
+        <?php
         }
         ?>
       </div>
