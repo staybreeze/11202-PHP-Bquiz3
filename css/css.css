@@ -140,8 +140,8 @@ input:focus
 	display:block;
 	margin-left:auto;
 	margin-right:auto;
-	min-height:100px;
-	padding:10px;
+	/* min-height:100px; */
+	min-height:360px;
 }
 .ts
 {
