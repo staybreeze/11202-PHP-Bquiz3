@@ -6,7 +6,7 @@
 </style>
 <h2 class="ct">編輯院線片</h2>
 <?php $movie=$Movie->find($_GET['id']);?>
-<form action="./api/edit_movie.php" method="post" enctype="multipart/form-data">
+<form action="./api/save_movie.php" method="post" enctype="multipart/form-data">
 <div style="display:flex;align-items:start">
     <div style="width:15%;">影片資料</div>
     <div style="width:85%;">
@@ -85,7 +85,7 @@
     </div>
 </div>
 <div class="ct">
-    <input type="hidden" name="">
+    <input type="hidden" name="id" value="<?=$movie['id'];?>">
     <input type="submit" value="編輯">
     <input type="reset" value="重置">
 </div>

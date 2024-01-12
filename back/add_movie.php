@@ -4,7 +4,8 @@
         padding:3px 5px;
     }
 </style>
-<form action="./api/add_movie.php" method="post" enctype="multipart/form-data">
+<h2 class="ct">新增院線片</h2>
+<form action="./api/save_movie.php" method="post" enctype="multipart/form-data">
 <div style="display:flex;align-items:start">
     <div style="width:15%;">影片資料</div>
     <div style="width:85%;">
@@ -80,5 +81,5 @@
 <div class="ct">
     <input type="submit" value="新增">
     <input type="reset" value="重置">
-—</div>
+</div>
 </form>
