@@ -100,7 +100,8 @@
     </div>
 </div>
 <script>
-    // 在 jQuery 中，eq(0) 表示選擇集合中的第一個元素。這個方法用於對選擇集中的元素進行過濾，只保留索引為 0 的元素。
+    
+// 在 jQuery 中，eq(0) 表示選擇集合中的第一個元素。這個方法用於對選擇集中的元素進行過濾，只保留索引為 0 的元素。
 
 // 例如，如果有一個 jQuery 選擇集 $('div') 包含多個 <div> 元素，則 $('div').eq(0) 會返回這個集合中的第一個 <div> 元素。
 $(".item").eq(0).show();
@@ -129,9 +130,10 @@ function slide(){
                 $(".item").eq(next).slideDown(1000);
             });
         break;
-
     }
+
     now=next;
+
 }
 
 
@@ -154,6 +156,15 @@ $(".left,.right").on("click",function(){
     }
     $(".btn").animate({right:90*p})
 })
+
+$(".btns").hover(
+    function (){
+        clearInterval(timer)
+    },
+    function(){
+        timer=setInterval(()=>{slide()},3000)
+    }
+)
 
 </script>
 
