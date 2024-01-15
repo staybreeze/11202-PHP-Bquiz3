@@ -1,7 +1,10 @@
 <style>
 .lists{
-   /*  position: relative; */
+    position: relative;
     left:114px;
+    width:200px;
+    height:240px;
+    overflow: hidden;
 }
 .item *{
     box-sizing: border-box;
@@ -12,6 +15,7 @@
  margin:auto;
  box-sizing: border-box;
  display:none;
+ position: absolute;
 }
 .item div img{
     width:100%;
@@ -68,7 +72,7 @@
             $posters=$Poster->all(['sh'=>1]," order by rank");
             foreach($posters as $idx => $poster){
             ?>
-            <div class="item">
+            <div class="item" data-ani="<?=$poster['ani'];?>">
                 <div><img src="./img/<?=$poster['img'];?>" alt=""></div>
                 <div><?=$poster['name'];?></div>
             </div>
@@ -96,21 +100,42 @@
     </div>
 </div>
 <script>
-$(".item").eq(0).show();
+    // 在 jQuery 中，eq(0) 表示選擇集合中的第一個元素。這個方法用於對選擇集中的元素進行過濾，只保留索引為 0 的元素。
 
+// 例如，如果有一個 jQuery 選擇集 $('div') 包含多個 <div> 元素，則 $('div').eq(0) 會返回這個集合中的第一個 <div> 元素。
+$(".item").eq(0).show();
+let total=$(".btn").length
 let now=0;
 let timer=setInterval(()=>{slide()},3000)
 function slide(){
-    $(".item").hide();
-    now++;
-    if(now>8){
-        now=0;
+    let ani=$(".item").eq(now).data("ani");
+    let next=now+1;
+        if(next>=total){
+            next=0;
+        }
+    switch(ani){
+        case 1:
+            $(".item").eq(now).fadeOut(1000,function(){
+                $(".item").eq(next).fadeIn(1000);
+            });
+        break;
+        case 2:
+            $(".item").eq(now).hide(1000,function(){
+                $(".item").eq(next).show(1000);
+            });
+        break;
+        case 3:
+            $(".item").eq(now).slideUp(1000,function(){
+                $(".item").eq(next).slideDown(1000);
+            });
+        break;
+
     }
-    $(".item").eq(now).show();
+    now=next;
 }
 
 
-let total=$(".btn").length
+
 let p=0;
 
 $(".left,.right").on("click",function(){
