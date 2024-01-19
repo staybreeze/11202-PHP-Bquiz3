@@ -59,12 +59,11 @@ $session=$_GET['session'];
 <div>您已經勾選<span id='tickets'>0</span>張票，最多可以購買四張票</div>
 <div>
     <button onclick="$('#select').show();$('#booking').hide()">上一步</button>
-    <button>訂購</button>
+    <button onclick="checkout()">訂購</button>
 </div>
 </div>
 
 <script>
-    // 創立一個新陣列放點選資料
 let seats=new Array();
 
 $(".chk").on("change",function(){
@@ -84,15 +83,14 @@ $(".chk").on("change",function(){
         // 這樣，seats 陣列中就移除了特定值。
         seats.splice(seats.indexOf($(this).val()),1)
     }
-    console.log(seats.length)
     $("#tickets").text(seats.length)
 
 })  
-
 function checkout(){
     $.post("./api/checkout.php",{movie:'<?=$movie['name'];?>',
                                  date:'<?=$date;?>',
                                  session:'<?=$session;?>',
+                                 qt:seats.length,
                                  seats},
                                  (no)=>{
                                     location.href=`?do=result&no=${no}`;
