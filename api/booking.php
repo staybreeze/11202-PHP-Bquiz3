@@ -64,22 +64,38 @@ $session=$_GET['session'];
 </div>
 
 <script>
+    // 創立一個新陣列放點選資料
 let seats=new Array();
 
 $(".chk").on("change",function(){
     if($(this).prop('checked')){
         if(seats.length+1<=4){
+            // 如果不足四張的話，將資料push進seats裡
             seats.push($(this).val())
         }else{
+            // 如果超過四張，把陣列裡該筆的勾選紀錄刪除
             $(this).prop('checked',false)
             alert("每個人只能勾選四張票")
         }
     }else{
-
+        // splice 函數，目的是將陣列 seats 中特定值的元素移除
+        // 具體而言，seats.indexOf($(this).val()) 用來找到陣列 seats 中第一次出現 $(this).val() 值的索引位置。
+        // 接著，splice(index, 1) 會在陣列中的該索引位置刪除一個元素。
+        // 這樣，seats 陣列中就移除了特定值。
         seats.splice(seats.indexOf($(this).val()),1)
     }
     console.log(seats.length)
     $("#tickets").text(seats.length)
 
 })  
+
+function checkout(){
+    $.post("./api/checkout.php",{movie:'<?=$movie['name'];?>',
+                                 date:'<?=$date;?>',
+                                 session:'<?=$session;?>',
+                                 seats},
+                                 (no)=>{
+                                    location.href=`?do=result&no=${no}`;
+                                 })
+}
 </script>
