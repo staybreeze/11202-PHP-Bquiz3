@@ -62,3 +62,24 @@ $session=$_GET['session'];
     <button>訂購</button>
 </div>
 </div>
+
+<script>
+let seats=new Array();
+
+$(".chk").on("change",function(){
+    if($(this).prop('checked')){
+        if(seats.length+1<=4){
+            seats.push($(this).val())
+        }else{
+            $(this).prop('checked',false)
+            alert("每個人只能勾選四張票")
+        }
+    }else{
+
+        seats.splice(seats.indexOf($(this).val()),1)
+    }
+    console.log(seats.length)
+    $("#tickets").text(seats.length)
+
+})  
+</script>
